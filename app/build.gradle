@@ -2,17 +2,19 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    //id 'dagger.hilt.android.plugin'
+    //kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     namespace 'manu.hworld.podcastcatalog'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "manu.hworld.podcastcatalog"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -40,8 +42,10 @@ android {
 dependencies {
 
     //Room
-    implementation "androidx.room:room-ktx:2.4.0"
-    kapt "androidx.room:room-compiler:2.4.0"
+    def room_version = "2.5.0"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    annotationProcessor("androidx.room:room-compiler:$room_version")
 
     //Coroutines
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
@@ -54,8 +58,14 @@ dependencies {
     implementation "com.squareup.picasso:picasso:2.71828"
 
     //DaggerHilt
-    implementation "com.google.dagger:hilt-android:2.41"
-    kapt "com.google.dagger:hilt-android-compiler:2.41"
+    //implementation "com.google.dagger:hilt-android:2.41"
+    //kapt "com.google.dagger:hilt-android-compiler:2.41"
+    def hilt_version = "2.44"
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+
+    //Fragment
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -64,4 +74,12 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

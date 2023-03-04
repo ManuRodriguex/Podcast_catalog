@@ -4,15 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.MainActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mainToolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="10dp"
+        android:background="@color/teal_200"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/my_frag_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="1"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svPodcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/lightGray"
+        android:outlineAmbientShadowColor="@color/purple_700"
+        android:elevation="4dp"
+        android:textColor="@color/black"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPodcasts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/svPodcast"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/podcast_list_item"
+        android:layout_marginTop="8dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:indeterminate="true"
+        app:layout_constraintTop_toTopOf="@id/rvPodcasts"
+        app:layout_constraintBottom_toBottomOf="@id/rvPodcasts"
+        app:layout_constraintStart_toStartOf="@id/rvPodcasts"
+        app:layout_constraintEnd_toEndOf="@id/rvPodcasts"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
